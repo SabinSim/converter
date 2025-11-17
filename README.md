@@ -4,38 +4,45 @@
 
 
 A simple **Swiss Franc (CHF) ↔ Euro (EUR)** currency converter project.
-Runs in the console using Python’s `input()` and provides basic currency conversion.
+`converter.py` provides a console version and `converter_streamlit.py` provides a Streamlit web UI version.
 
 ---
 
 ## 🚀 Features 
 
+### ✔ Console Version (converter.py)
 
 * Convert CHF → EUR
 
 * Convert EUR → CHF
 
-* Executes different logic depending on user selection
+* Simple console-based interface
 
-* Console-based user interface
+### ✔ Streamlit Web Version (converter_streamlit.py)
+
+* Clean and intuitive web interface
+
+* Real-time amount input
+
+* Instant conversion results
 
 ---
 
-## 📂 Project Structure 
+## 📂 Project Structure
 
 ```
 converter/
 │
-├── converter.py
+├── converter.py              # Console version
+├── converter_streamlit.py    # Streamlit web version
 └── README.md
 ```
 
 ---
 
-## 🧩 Code Example 
+## 🧩 Code Example (Console) 
 
 ```python
-
 rate = 1.05  # exchange rate
 
 choice = input("Select an option: 1) CHF → EUR | 2) EUR → CHF: ")
@@ -54,37 +61,68 @@ elif choice == "2":
 
 else:
     print("Invalid option.")
-
 ```
 
 ---
 
-## 📝 How to Run
+## 🌐 Code Example (Streamlit)
 
-### 1. Clone or download
+```python
+import streamlit as st
 
-```bash
-git clone https://github.com/yourname/converter.git
-cd converter
+st.title("💱 Currency Converter (CHF ↔ EUR)")
+
+rate = 1.05  # exchange rate
+
+option = st.radio(
+    "Select conversion direction:",
+    ("CHF → EUR", "EUR → CHF")
+)
+
+amount = st.number_input("Enter amount:", min_value=0.0, format="%.2f")
+
+if st.button("Convert"):
+    if option == "CHF → EUR":
+        result = amount * rate
+        st.success(f"{amount} CHF = {result:.2f} EUR")
+    else:
+        result = amount / rate
+        st.success(f"{amount} EUR = {result:.2f} CHF")
 ```
 
-### 2. Run
+---
+
+## 📝 How to Run 
+
+### ✔ Console Version
 
 ```bash
 python3 converter.py
 ```
 
+### ✔ Streamlit Web Version
+
+```bash
+pip install streamlit
+streamlit run converter_streamlit.py
+```
+
+A browser window will open automatically and load the web interface.
+
 ---
 
-## 🔧 Future Improvements 
+## 🔧 Future Improvements
 
-* Add real-time exchange rate API
 
-* Build a GUI version (tkinter / streamlit)
+* Integrate real-time exchange rate API
 
-* Support more currencies (USD, KRW, etc.)
+* Multi-currency support
 
-* Add error handling and input validation
+* Improve Streamlit UI design + dark mode
+
+* Input validation & error handling
+
+* Show last updated time for exchange rate
 
 ---
 
